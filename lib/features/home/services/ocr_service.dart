@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/memory_provider.dart';
 import '../../../core/services/api/chat_api_service.dart';
 
 /// OCR 缓存条目
@@ -82,6 +83,7 @@ class OcrService {
       extraHeaders: null,
       extraBody: null,
       stream: false,
+      memoryProvider: context.read<MemoryProvider>(),
     );
 
     String out = '';

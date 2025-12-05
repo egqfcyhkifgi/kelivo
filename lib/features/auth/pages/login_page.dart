@@ -190,10 +190,8 @@ class _LoginPageState extends State<LoginPage> {
       final UserCredential userCredential = await _auth.signInWithCredential(credential);
       
       if (userCredential.user != null) {
-        // Navigate to main app
-        if (mounted) {
-          Navigator.of(context).pushReplacementNamed('/home');
-        }
+        // User signed in successfully - the StreamBuilder in main.dart will handle navigation
+        // No need to manually navigate as the auth state change will trigger automatic navigation
       }
     } catch (e) {
       if (mounted) {

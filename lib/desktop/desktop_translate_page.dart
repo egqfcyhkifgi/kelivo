@@ -9,6 +9,7 @@ import '../l10n/app_localizations.dart';
 import '../utils/brand_assets.dart';
 import '../core/providers/settings_provider.dart';
 import '../core/providers/assistant_provider.dart';
+import '../core/providers/memory_provider.dart';
 import '../core/services/api/chat_api_service.dart';
 import '../shared/widgets/snackbar.dart';
 import '../features/model/widgets/model_select_sheet.dart' show showModelSelector, ModelSelection;
@@ -153,6 +154,7 @@ class _DesktopTranslatePageState extends State<DesktopTranslatePage> {
         messages: [
           {'role': 'user', 'content': prompt},
         ],
+        memoryProvider: context.read<MemoryProvider>(),
       );
 
       _subscription = stream.listen(

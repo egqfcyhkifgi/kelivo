@@ -22,12 +22,12 @@ import 'mermaid_bridge.dart';
 import 'export_capture_scope.dart';
 import 'mermaid_image_cache.dart';
 import 'plantuml_block.dart';
-import 'package:Kelivo/l10n/app_localizations.dart';
-import 'package:Kelivo/theme/theme_factory.dart' show getPlatformFontFallback;
+import 'package:kelivo/l10n/app_localizations.dart';
+import 'package:kelivo/theme/theme_factory.dart' show getPlatformFontFallback;
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/providers/settings_provider.dart';
-import 'package:Kelivo/desktop/html_preview_dialog.dart';
+import 'package:kelivo/desktop/html_preview_dialog.dart';
 
 /// gpt_markdown with custom code block highlight and inline code styling.
 class MarkdownWithCodeHighlight extends StatelessWidget {

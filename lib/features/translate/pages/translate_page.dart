@@ -9,6 +9,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../utils/brand_assets.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/providers/assistant_provider.dart';
+import '../../../core/providers/memory_provider.dart';
 import '../../../core/services/api/chat_api_service.dart';
 import '../../../shared/widgets/ios_tactile.dart';
 import '../../../shared/widgets/snackbar.dart';
@@ -113,6 +114,7 @@ class _TranslatePageState extends State<TranslatePage> {
         messages: [
           {'role': 'user', 'content': p},
         ],
+        memoryProvider: context.read<MemoryProvider>(),
       );
       _sub = stream.listen(
         (chunk) {

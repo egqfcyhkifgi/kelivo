@@ -7,6 +7,7 @@ import '../../../core/models/conversation.dart';
 import '../../../core/models/token_usage.dart';
 import '../../../core/providers/assistant_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/memory_provider.dart';
 import '../../../core/services/api/chat_api_service.dart';
 import '../../../core/services/chat/chat_service.dart';
 import '../../../utils/assistant_regex.dart';
@@ -445,6 +446,7 @@ class ChatActions {
         extraHeaders: ctx.extraHeaders,
         extraBody: ctx.extraBody,
         stream: ctx.streamOutput,
+        memoryProvider: ctx.context.read<MemoryProvider>(),
       );
 
       await _conversationStreams[conversationId]?.cancel();

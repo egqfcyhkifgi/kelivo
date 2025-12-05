@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/models/chat_message.dart';
 import '../../../core/providers/assistant_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/memory_provider.dart';
 import '../../../core/services/api/chat_api_service.dart';
 import '../../../core/services/chat/chat_service.dart';
 import '../../settings/widgets/language_select_sheet.dart';
@@ -120,6 +121,7 @@ class TranslationService {
         messages: [
           {'role': 'user', 'content': prompt}
         ],
+        memoryProvider: context.read<MemoryProvider>(),
       );
 
       final buffer = StringBuffer();

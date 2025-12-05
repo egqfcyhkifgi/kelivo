@@ -482,6 +482,7 @@ class ChatApiService {
     Map<String, String>? extraHeaders,
     Map<String, dynamic>? extraBody,
     bool stream = true,
+    MemoryProvider? memoryProvider,
   }) async* {
     // Use BuildX API if configured
     final buildxApi = BuildXApiService();
@@ -491,7 +492,7 @@ class ChatApiService {
         final history = messages.length > 1 ? messages.sublist(0, messages.length - 1) : <Map<String, dynamic>>[];
         
         if (stream) {
-          final responseStream = await buildxApi.sendMessageStream(lastMessage, history: history, memoryProvider: MemoryProvider());
+          final responseStream = await buildxApi.sendMessageStream(lastMessage, history: history, memoryProvider: memoryProvider);
           await for (final chunk in responseStream) {
             yield ChatStreamChunk(
               content: chunk,
@@ -505,7 +506,7 @@ class ChatApiService {
             tokenUsage: TokenUsage(promptTokens: 0, completionTokens: 0, totalTokens: 0),
           );
         } else {
-          final response = await buildxApi.sendMessage(lastMessage, history: history, memoryProvider: MemoryProvider());
+          final response = await buildxApi.sendMessage(lastMessage, history: history, memoryProvider: memoryProvider);
           yield ChatStreamChunk(
             content: response,
             isComplete: true,

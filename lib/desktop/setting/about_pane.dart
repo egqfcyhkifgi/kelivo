@@ -217,7 +217,7 @@ class _AppHeaderCardState extends State<_AppHeaderCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('Kelivo', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
+                        const Text('Build X', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700)),
                         const SizedBox(height: 4),
                         Text(
                           widget.description,
