@@ -12,6 +12,8 @@ import 'google_service_account_auth.dart';
 import '../../services/api_key_manager.dart';
 import 'package:BuildX/secrets/fallback.dart';
 import '../../../utils/markdown_media_sanitizer.dart';
+import 'buildx_api_service.dart';
+import '../../providers/memory_provider.dart';
 
 class ChatApiService {
   /// Resolve the upstream/vendor model id for a given logical model key.
@@ -481,6 +483,47 @@ class ChatApiService {
     Map<String, dynamic>? extraBody,
     bool stream = true,
   }) async* {
+    // Use BuildX API if configured
+    final buildxApi = BuildXApiService();
+    if (buildxApi.isConfigured()) {
+      try {
+        final lastMessage = messages.isNotEmpty ? messages.last['content'] ?? '' : '';
+        final history = messages.length > 1 ? messages.sublist(0, messages.length - 1) : <Map<String, dynamic>>[];
+        
+        if (stream) {
+          final responseStream = await buildxApi.sendMessageStream(lastMessage, history: history, memoryProvider: MemoryProvider());
+          await for (final chunk in responseStream) {
+            yield ChatStreamChunk(
+              content: chunk,
+              isComplete: false,
+              tokenUsage: null,
+            );
+          }
+          yield ChatStreamChunk(
+            content: '',
+            isComplete: true,
+            tokenUsage: TokenUsage(promptTokens: 0, completionTokens: 0, totalTokens: 0),
+          );
+        } else {
+          final response = await buildxApi.sendMessage(lastMessage, history: history, memoryProvider: MemoryProvider());
+          yield ChatStreamChunk(
+            content: response,
+            isComplete: true,
+            tokenUsage: TokenUsage(promptTokens: 0, completionTokens: 0, totalTokens: 0),
+          );
+        }
+        return;
+      } catch (e) {
+        yield ChatStreamChunk(
+          content: '',
+          isComplete: true,
+          error: 'BuildX API Error: $e',
+          tokenUsage: null,
+        );
+        return;
+      }
+    }
+
     final kind = ProviderConfig.classify(config.id, explicitType: config.providerType);
     final client = _clientFor(config);
 

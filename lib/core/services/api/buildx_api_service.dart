@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import '../../providers/memory_provider.dart';
 
 class BuildXApiService {
   static final BuildXApiService _instance = BuildXApiService._internal();
@@ -12,13 +13,24 @@ class BuildXApiService {
   int get apiTimeout => int.tryParse(dotenv.env['API_TIMEOUT'] ?? '30000') ?? 30000;
   int get maxTokens => int.tryParse(dotenv.env['MAX_TOKENS'] ?? '4096') ?? 4096;
 
-  Future<String> sendMessage(String message, {List<Map<String, dynamic>>? history}) async {
+  Future<String> sendMessage(String message, {List<Map<String, dynamic>>? history, MemoryProvider? memoryProvider}) async {
     if (apiUrl.isEmpty) {
       throw Exception('API URL not configured. Please check your .env file.');
     }
 
     try {
       final messages = <Map<String, dynamic>>[];
+      
+      // Add memory context if enabled
+      if (memoryProvider != null) {
+        final memoryContext = memoryProvider.getMemoryForChat();
+        if (memoryContext.isNotEmpty) {
+          messages.add({
+            'role': 'system',
+            'content': memoryContext,
+          });
+        }
+      }
       
       // Add history if provided
       if (history != null) {
@@ -56,13 +68,24 @@ class BuildXApiService {
     }
   }
 
-  Future<Stream<String>> sendMessageStream(String message, {List<Map<String, dynamic>>? history}) async {
+  Future<Stream<String>> sendMessageStream(String message, {List<Map<String, dynamic>>? history, MemoryProvider? memoryProvider}) async {
     if (apiUrl.isEmpty) {
       throw Exception('API URL not configured. Please check your .env file.');
     }
 
     try {
       final messages = <Map<String, dynamic>>[];
+      
+      // Add memory context if enabled
+      if (memoryProvider != null) {
+        final memoryContext = memoryProvider.getMemoryForChat();
+        if (memoryContext.isNotEmpty) {
+          messages.add({
+            'role': 'system',
+            'content': memoryContext,
+          });
+        }
+      }
       
       // Add history if provided
       if (history != null) {
