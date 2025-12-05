@@ -10,7 +10,7 @@ import '../../../utils/sandbox_path_resolver.dart';
 import '../../../utils/app_directories.dart';
 import 'google_service_account_auth.dart';
 import '../../services/api_key_manager.dart';
-import 'package:Kelivo/secrets/fallback.dart';
+import 'package:BuildX/secrets/fallback.dart';
 import '../../../utils/markdown_media_sanitizer.dart';
 
 class ChatApiService {

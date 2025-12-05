@@ -1,6 +1,6 @@
 import 'package:mcp_client/mcp_client.dart' as mcp;
 
-import 'kelivo_fetch_server.dart';
+import 'buildx_fetch_server.dart';
 
 /// Build a function-call-friendly tool name (similar to Cherry Studio strategy)
 String buildFunctionCallToolName(String serverName, String toolName) {
@@ -22,11 +22,11 @@ String buildFunctionCallToolName(String serverName, String toolName) {
 /// Start the in-memory @kelivo/fetch MCP server and connect a client to it.
 /// Returns the connected client and a stop() to dispose both ends.
 Future<({mcp.Client client, Future<void> Function() stop})> startFetchMcpInMemory() async {
-  final server = KelivoFetchMcpServerEngine();
+  final server = BuildXFetchMcpServerEngine();
   final transport = KelivoInMemoryClientTransport(server);
 
   final client = mcp.McpClient.createClient(
-    mcp.McpClient.simpleConfig(name: 'Kelivo App', version: '1.0.0'),
+    mcp.McpClient.simpleConfig(name: 'Build X App', version: '1.0.0'),
   );
   await client.connect(transport);
 

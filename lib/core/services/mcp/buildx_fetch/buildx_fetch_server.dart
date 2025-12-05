@@ -20,14 +20,14 @@ import 'package:mcp_client/mcp_client.dart' as mcp;
 /// isolate as the Flutter app and connect to a standard mcp.Client via an
 /// in-memory ClientTransport.
 
-class KelivoFetchRequestPayload {
+class BuildXFetchRequestPayload {
   final Uri url;
   final Map<String, String> headers;
 
-  KelivoFetchRequestPayload({required this.url, Map<String, String>? headers})
+  BuildXFetchRequestPayload({required this.url, Map<String, String>? headers})
       : headers = headers ?? const {};
 
-  static KelivoFetchRequestPayload parse(Object? args) {
+  static BuildXFetchRequestPayload parse(Object? args) {
     if (args is! Map) {
       throw ArgumentError('Invalid arguments: expected object with url[, headers]');
     }
@@ -45,15 +45,15 @@ class KelivoFetchRequestPayload {
         headers[k.toString()] = v.toString();
       });
     }
-    return KelivoFetchRequestPayload(url: uri, headers: headers);
+    return BuildXFetchRequestPayload(url: uri, headers: headers);
   }
 }
 
-class KelivoFetcher {
+class BuildXFetcher {
   static const _defaultUA =
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
-  static Future<http.Response> _fetch(KelivoFetchRequestPayload payload) async {
+  static Future<http.Response> _fetch(BuildXFetchRequestPayload payload) async {
     try {
       final merged = <String, String>{
         'User-Agent': _defaultUA,
@@ -69,7 +69,7 @@ class KelivoFetcher {
     }
   }
 
-  static Future<Map<String, dynamic>> html(KelivoFetchRequestPayload payload) async {
+  static Future<Map<String, dynamic>> html(BuildXFetchRequestPayload payload) async {
     try {
       final resp = await _fetch(payload);
       final text = resp.body;
@@ -79,7 +79,7 @@ class KelivoFetcher {
     }
   }
 
-  static Future<Map<String, dynamic>> json(KelivoFetchRequestPayload payload) async {
+  static Future<Map<String, dynamic>> json(BuildXFetchRequestPayload payload) async {
     try {
       final resp = await _fetch(payload);
       final raw = resp.body;
@@ -90,7 +90,7 @@ class KelivoFetcher {
     }
   }
 
-  static Future<Map<String, dynamic>> txt(KelivoFetchRequestPayload payload) async {
+  static Future<Map<String, dynamic>> txt(BuildXFetchRequestPayload payload) async {
     try {
       final resp = await _fetch(payload);
       final html = resp.body;
@@ -104,7 +104,7 @@ class KelivoFetcher {
     }
   }
 
-  static Future<Map<String, dynamic>> markdown(KelivoFetchRequestPayload payload) async {
+  static Future<Map<String, dynamic>> markdown(BuildXFetchRequestPayload payload) async {
     try {
       final resp = await _fetch(payload);
       final html = resp.body;
@@ -133,7 +133,7 @@ class KelivoFetcher {
 }
 
 /// Minimal JSON-RPC server for MCP that serves @kelivo/fetch tools.
-class KelivoFetchMcpServerEngine {
+class BuildXFetchMcpServerEngine {
   bool _closed = false;
 
   Future<dynamic> handleMessage(dynamic message) async {
@@ -187,24 +187,24 @@ class KelivoFetchMcpServerEngine {
               ? (params['arguments'] as Map).cast<String, dynamic>()
               : <String, dynamic>{};
 
-          KelivoFetchRequestPayload payload;
+          BuildXFetchRequestPayload payload;
           try {
-            payload = KelivoFetchRequestPayload.parse(arguments);
+            payload = BuildXFetchRequestPayload.parse(arguments);
           } catch (e) {
-            return _ok(id, result: KelivoFetcher._err(e.toString()));
+            return _ok(id, result: BuildXFetcher._err(e.toString()));
           }
 
           if (name == 'fetch_html') {
-            return _ok(id, result: await KelivoFetcher.html(payload));
+            return _ok(id, result: await BuildXFetcher.html(payload));
           }
           if (name == 'fetch_markdown') {
-            return _ok(id, result: await KelivoFetcher.markdown(payload));
+            return _ok(id, result: await BuildXFetcher.markdown(payload));
           }
           if (name == 'fetch_txt') {
-            return _ok(id, result: await KelivoFetcher.txt(payload));
+            return _ok(id, result: await BuildXFetcher.txt(payload));
           }
           if (name == 'fetch_json') {
-            return _ok(id, result: await KelivoFetcher.json(payload));
+            return _ok(id, result: await BuildXFetcher.json(payload));
           }
           return _error(id, code: -32101, message: 'Tool not found: $name');
 
@@ -279,7 +279,7 @@ class KelivoFetchMcpServerEngine {
 
 /// In-memory ClientTransport that directly invokes the local server engine.
 class KelivoInMemoryClientTransport implements mcp.ClientTransport {
-  final KelivoFetchMcpServerEngine _server;
+  final BuildXFetchMcpServerEngine _server;
   final _messageController = StreamController<dynamic>.broadcast();
   final _closeCompleter = Completer<void>();
   bool _closed = false;

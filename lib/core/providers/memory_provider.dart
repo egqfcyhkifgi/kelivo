@@ -1,49 +1,69 @@
 import 'package:flutter/foundation.dart';
-import '../models/assistant_memory.dart';
-import '../services/memory_store.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MemoryProvider extends ChangeNotifier {
-  List<AssistantMemory> _memories = <AssistantMemory>[];
-  bool _initialized = false;
+  static const String _memoryEnabledKey = 'memory_enabled';
+  static const String _memoryContentKey = 'memory_content';
+  
+  bool _isMemoryEnabled = false;
+  String _currentMemory = '';
+  
+  bool get isMemoryEnabled => _isMemoryEnabled;
+  String get currentMemory => _currentMemory;
 
-  List<AssistantMemory> get memories => List.unmodifiable(_memories);
-
-  List<AssistantMemory> getForAssistant(String assistantId) =>
-      _memories.where((m) => m.assistantId == assistantId).toList();
-
-  Future<void> initialize() async {
-    if (_initialized) return;
-    await loadAll();
-    _initialized = true;
+  MemoryProvider() {
+    _loadMemorySettings();
   }
 
-  Future<void> loadAll() async {
+  Future<void> _loadMemorySettings() async {
     try {
-      _memories = await MemoryStore.getAll();
+      final prefs = await SharedPreferences.getInstance();
+      _isMemoryEnabled = prefs.getBool(_memoryEnabledKey) ?? false;
+      _currentMemory = prefs.getString(_memoryContentKey) ?? '';
       notifyListeners();
     } catch (e) {
-      debugPrint('Failed to load memories: $e');
-      _memories = <AssistantMemory>[];
-      notifyListeners();
+      debugPrint('Error loading memory settings: $e');
     }
   }
 
-  Future<AssistantMemory> add({required String assistantId, required String content}) async {
-    final mem = await MemoryStore.add(assistantId: assistantId, content: content);
-    await loadAll();
-    return mem;
+  Future<void> setMemoryEnabled(bool enabled) async {
+    try {
+      _isMemoryEnabled = enabled;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool(_memoryEnabledKey, enabled);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error saving memory enabled setting: $e');
+    }
   }
 
-  Future<AssistantMemory?> update({required int id, required String content}) async {
-    final mem = await MemoryStore.update(id: id, content: content);
-    await loadAll();
-    return mem;
+  Future<void> updateMemory(String content) async {
+    try {
+      _currentMemory = content;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(_memoryContentKey, content);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error saving memory content: $e');
+    }
   }
 
-  Future<bool> delete({required int id}) async {
-    final ok = await MemoryStore.delete(id: id);
-    await loadAll();
-    return ok;
+  Future<void> clearMemory() async {
+    try {
+      _currentMemory = '';
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_memoryContentKey);
+      notifyListeners();
+    } catch (e) {
+      debugPrint('Error clearing memory: $e');
+    }
+  }
+
+  String getMemoryForChat() {
+    if (!_isMemoryEnabled || _currentMemory.isEmpty) {
+      return '';
+    }
+    return 'Remember this information: $_currentMemory\n\n';
   }
 }
 

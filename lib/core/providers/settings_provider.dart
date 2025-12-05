@@ -467,7 +467,7 @@ class SettingsProvider extends ChangeNotifier {
     if (_providerConfigs.isEmpty) {
       // Seed a couple of sensible defaults on first launch, but do not recreate
       // providers implicitly during later reads (e.g., when switching chats).
-      ensureProviderConfig('KelivoIN', defaultName: 'KelivoIN');
+      ensureProviderConfig('BuildXIN', defaultName: 'BuildXIN');
       ensureProviderConfig('Tensdaq', defaultName: 'Tensdaq');
       ensureProviderConfig('SiliconFlow', defaultName: 'SiliconFlow');
     }
@@ -2192,7 +2192,7 @@ class ProviderConfig {
         );
       case ProviderKind.openai:
       default:
-        // Special-case KelivoIN default models and overrides
+        // Special-case BuildXIN default models and overrides
         if (lowerKey.contains('kelivoin')) {
           return ProviderConfig(
             id: key,

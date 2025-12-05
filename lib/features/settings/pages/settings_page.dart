@@ -4,20 +4,19 @@ import '../../../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../../../icons/lucide_adapter.dart';
 import '../../../core/providers/settings_provider.dart';
-import '../../model/pages/default_model_page.dart';
-import '../../provider/pages/providers_page.dart';
+// Removed unused model and provider imports
 import 'display_settings_page.dart';
 import '../../../core/services/chat/chat_service.dart';
-import '../../mcp/pages/mcp_page.dart';
-import '../../assistant/pages/assistant_settings_page.dart';
+// Removed unused MCP and assistant imports
 import 'about_page.dart';
 import 'tts_services_page.dart';
-import 'sponsor_page.dart';
+
 import '../../search/pages/search_services_page.dart';
 import '../../backup/pages/backup_page.dart';
 import '../../quick_phrase/pages/quick_phrases_page.dart';
 import '../../instruction_injection/pages/instruction_injection_page.dart';
 import 'network_proxy_page.dart';
+import '../../memory/pages/memory_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../core/services/haptics.dart';
@@ -159,41 +158,25 @@ class SettingsPage extends StatelessWidget {
                 );
               },
             ),
-            _iosDivider(context),
-            _iosNavRow(
-              context,
-              icon: Lucide.Bot,
-              label: l10n.settingsPageAssistant,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const AssistantSettingsPage()),
-                );
-              },
-            ),
+            // Assistant page is hidden
+            // _iosDivider(context),
+            // _iosNavRow(
+            //   context,
+            //   icon: Lucide.Bot,
+            //   label: l10n.settingsPageAssistant,
+            //   onTap: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(builder: (_) => const AssistantSettingsPage()),
+            //     );
+            //   },
+            // ),
           ]),
 
           const SizedBox(height: 12),
           header(l10n.settingsPageModelsServicesSection),
           _iosSectionCard(children: [
-            _iosNavRow(
-              context,
-              icon: Lucide.Heart,
-              label: l10n.settingsPageDefaultModel,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const DefaultModelPage()),
-                );
-              },
-            ),
-            _iosDivider(context),
-            _iosNavRow(
-              context,
-              icon: Lucide.Boxes,
-              label: l10n.settingsPageProviders,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ProvidersPage()));
-              },
-            ),
+            // Default Model system removed
+            // Providers system removed
             _iosDivider(context),
             _iosNavRow(
               context,
@@ -216,15 +199,7 @@ class SettingsPage extends StatelessWidget {
                 );
               },
             ),
-            _iosDivider(context),
-            _iosNavRow(
-              context,
-              icon: Lucide.Terminal,
-              label: l10n.settingsPageMcp,
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (_) => const McpPage()));
-              },
-            ),
+            // MCP system removed
             _iosDivider(context),
             _iosNavRow(
               context,
@@ -245,17 +220,7 @@ class SettingsPage extends StatelessWidget {
                 );
               },
             ),
-            _iosDivider(context),
-            _iosNavRow(
-              context,
-              icon: Lucide.EthernetPort,
-              label: l10n.settingsPageNetworkProxy,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const NetworkProxyPage()),
-                );
-              },
-            ),
+            // Network Proxy system removed
           ]),
 
           const SizedBox(height: 12),
@@ -268,6 +233,17 @@ class SettingsPage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const BackupPage()),
+                );
+              },
+            ),
+            _iosDivider(context),
+            _iosNavRow(
+              context,
+              icon: Lucide.Brain,
+              label: 'Memory',
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const MemoryPage()),
                 );
               },
             ),
@@ -328,17 +304,7 @@ class SettingsPage extends StatelessWidget {
                 }
               },
             ),
-            _iosDivider(context),
-            _iosNavRow(
-              context,
-              icon: Lucide.Heart,
-              label: l10n.settingsPageSponsor,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const SponsorPage()),
-                );
-              },
-            ),
+
             // _iosDivider(context),
             // _iosNavRow(
             //   context,
