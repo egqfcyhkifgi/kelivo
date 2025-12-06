@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:BuildX/l10n/app_localizations.dart';
 import 'package:gpt_markdown/gpt_markdown.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:gpt_markdown/custom_widgets/markdown_config.dart'
@@ -17,17 +18,18 @@ import 'dart:ui' as ui;
 import '../../utils/sandbox_path_resolver.dart';
 import '../../features/chat/pages/image_viewer_page.dart';
 import '../../features/chat/pages/html_preview_page.dart';
+import '../../desktop/html_preview_dialog.dart';
 import 'snackbar.dart';
 import 'mermaid_bridge.dart';
 import 'export_capture_scope.dart';
 import 'mermaid_image_cache.dart';
 import 'plantuml_block.dart';
-import 'package:kelivo/l10n/app_localizations.dart';
-import 'package:kelivo/theme/theme_factory.dart' show getPlatformFontFallback;
+import 'package:BuildX/l10n/app_localizations.dart';
+import 'package:BuildX/theme/theme_factory.dart' show getPlatformFontFallback;
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/providers/settings_provider.dart';
-import 'package:kelivo/desktop/html_preview_dialog.dart';
+import 'package:BuildX/desktop/html_preview_dialog.dart';
 
 /// gpt_markdown with custom code block highlight and inline code styling.
 class MarkdownWithCodeHighlight extends StatelessWidget {

@@ -35,7 +35,7 @@ class _AboutPageState extends State<AboutPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.aboutPageTitle),
+        title: const Text('About'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

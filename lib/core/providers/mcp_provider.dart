@@ -622,15 +622,11 @@ class McpProvider extends ChangeNotifier {
       // In-memory builtin server path
       if (server.transport == McpTransportType.inmemory) {
         final engine = BuildXFetchMcpServerEngine();
-        final transport = BuildXInMemoryClientTransport(engine);
-        final client = mcp.McpClient.createClient(clientConfig);
-        await client.connect(transport);
-        _clients[id] = client;
-        _status[id] = McpStatus.connected;
-        _errors.remove(id);
+        // TODO: Implement BuildXInMemoryClientTransport
+        // final transport = BuildXInMemoryClientTransport(engine);
+        _status[id] = McpStatus.error;
+        _errors[id] = 'In-memory transport not implemented yet';
         notifyListeners();
-        await refreshTools(id);
-        _startHeartbeat(id);
         return;
       }
 

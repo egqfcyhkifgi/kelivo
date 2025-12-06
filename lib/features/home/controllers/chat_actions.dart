@@ -446,7 +446,7 @@ class ChatActions {
         extraHeaders: ctx.extraHeaders,
         extraBody: ctx.extraBody,
         stream: ctx.streamOutput,
-        memoryProvider: ctx.context.read<MemoryProvider>(),
+        memoryProvider: contextProvider.read<MemoryProvider>(),
       );
 
       await _conversationStreams[conversationId]?.cancel();

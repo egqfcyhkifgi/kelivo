@@ -111,7 +111,7 @@ class BuildXApiService {
       final streamedResponse = await http.Client().send(request);
       
       if (streamedResponse.statusCode == 200) {
-        return streamedResponse.stream
+        final stream = streamedResponse.stream
             .transform(utf8.decoder)
             .transform(const LineSplitter())
             .where((line) => line.startsWith('data: ') && !line.contains('[DONE]'))
@@ -123,7 +123,9 @@ class BuildXApiService {
                 return '';
               }
             })
-            .where((content) => content.isNotEmpty);
+            .where((content) => content.isNotEmpty)
+            .cast<String>();
+        return stream;
       } else {
         throw Exception('API Error: ${streamedResponse.statusCode}');
       }

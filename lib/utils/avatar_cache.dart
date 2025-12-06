@@ -13,12 +13,10 @@ class AvatarCache {
   }
 
   static String _safeName(String url) {
-    // Use 64-bit FNV-1a hash to avoid collisions from common URL prefixes
-    int h = 0xcbf29ce484222325; // FNV offset basis
-    const int prime = 0x100000001b3; // FNV prime
+    // Use simple hash for web compatibility
+    int h = 0;
     for (final c in url.codeUnits) {
-      h ^= c;
-      h = (h * prime) & 0xFFFFFFFFFFFFFFFF; // keep 64-bit
+      h = ((h << 5) - h + c) & 0x7FFFFFFF; // keep 32-bit positive
     }
     final hex = h.toRadixString(16).padLeft(16, '0');
     // Attempt to keep a reasonable extension (may help some platforms)

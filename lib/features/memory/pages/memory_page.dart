@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:BuildX/l10n/app_localizations.dart';
 import '../../../icons/lucide_adapter.dart';
 import '../../../core/providers/memory_provider.dart';
 import '../../../shared/widgets/ios_switch.dart';
@@ -42,7 +42,7 @@ class _MemoryPageState extends State<MemoryPage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Lucide.Save),
+            icon: const Icon(Lucide.Check),
             onPressed: () => _saveMemory(),
           ),
         ],
@@ -82,7 +82,7 @@ class _MemoryPageState extends State<MemoryPage> {
                             ],
                           ),
                         ),
-                        IOSSwitch(
+                        IosSwitch(
                           value: memoryProvider.isMemoryEnabled,
                           onChanged: (value) {
                             memoryProvider.setMemoryEnabled(value);
@@ -148,7 +148,7 @@ class _MemoryPageState extends State<MemoryPage> {
                     Expanded(
                       child: FilledButton.icon(
                         onPressed: memoryProvider.isMemoryEnabled ? _saveMemory : null,
-                        icon: const Icon(Lucide.Save),
+                        icon: const Icon(Lucide.Check),
                         label: const Text('Save'),
                       ),
                     ),

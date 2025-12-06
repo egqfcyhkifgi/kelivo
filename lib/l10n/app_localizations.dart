@@ -1274,7 +1274,7 @@ abstract class AppLocalizations {
   /// No description provided for @androidBackgroundNotificationTitle.
   ///
   /// In en, this message translates to:
-  /// **'Build X is running'**
+  /// **'Kelivo is running'**
   String get androidBackgroundNotificationTitle;
 
   /// No description provided for @androidBackgroundNotificationText.
@@ -5636,7 +5636,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsShare.
   ///
   /// In en, this message translates to:
-  /// **'Build X - AI Assistant'**
+  /// **'Kelivo - Open Source AI Assistant'**
   String get settingsShare;
 
   /// No description provided for @searchProviderBingLocalDescription.

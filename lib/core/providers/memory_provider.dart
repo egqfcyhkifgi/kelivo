@@ -65,5 +65,41 @@ class MemoryProvider extends ChangeNotifier {
     }
     return 'Remember this information: $_currentMemory\n\n';
   }
+
+  // Additional methods for compatibility
+  Future<void> initialize() async {
+    await _loadMemorySettings();
+  }
+
+  List<MemoryItem> getForAssistant(String assistantId) {
+    // Simple implementation - return current memory as a single item
+    if (_currentMemory.isNotEmpty) {
+      return [MemoryItem(id: '1', assistantId: assistantId, content: _currentMemory)];
+    }
+    return [];
+  }
+
+  Future<MemoryItem> add({required String assistantId, required String content}) async {
+    await updateMemory(content);
+    return MemoryItem(id: '1', assistantId: assistantId, content: content);
+  }
+
+  Future<MemoryItem> update({required String id, required String content}) async {
+    await updateMemory(content);
+    return MemoryItem(id: id, assistantId: '', content: content);
+  }
+
+  Future<bool> delete({required String id}) async {
+    await clearMemory();
+    return true;
+  }
+}
+
+class MemoryItem {
+  final String id;
+  final String assistantId;
+  final String content;
+
+  MemoryItem({required this.id, required this.assistantId, required this.content});
 }
 

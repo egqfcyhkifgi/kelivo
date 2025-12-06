@@ -321,7 +321,7 @@ class _MemoryTab extends StatelessWidget {
                             if (id == null) {
                               await mp.add(assistantId: assistantId, content: text);
                             } else {
-                              await mp.update(id: id, content: text);
+                              await mp.update(id: id.toString(), content: text);
                             }
                             if (context.mounted) Navigator.of(ctx).pop();
                           },
@@ -341,7 +341,7 @@ class _MemoryTab extends StatelessWidget {
                                 if (id == null) {
                                   await mp.add(assistantId: assistantId, content: text);
                                 } else {
-                                  await mp.update(id: id, content: text);
+                                  await mp.update(id: id.toString(), content: text);
                                 }
                                 if (context.mounted) Navigator.of(ctx).pop();
                               },
@@ -434,7 +434,7 @@ class _MemoryTab extends StatelessWidget {
                           if (id == null) {
                             await mp.add(assistantId: assistantId, content: text);
                           } else {
-                            await mp.update(id: id, content: text);
+                            await mp.update(id: id.toString(), content: text);
                           }
                           if (context.mounted) Navigator.of(ctx).pop();
                         },
@@ -579,7 +579,7 @@ class _MemoryTab extends StatelessWidget {
                       icon: Lucide.Pencil,
                       size: 18,
                       color: cs.primary,
-                      onTap: () => _showAddEditSheet(context, id: m.id, initial: m.content),
+                      onTap: () => _showAddEditSheet(context, id: int.tryParse(m.id), initial: m.content),
                     ),
                     const SizedBox(width: 6),
                     _TactileIconButton(

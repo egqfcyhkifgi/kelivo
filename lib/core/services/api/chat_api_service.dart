@@ -496,30 +496,29 @@ class ChatApiService {
           await for (final chunk in responseStream) {
             yield ChatStreamChunk(
               content: chunk,
-              isComplete: false,
-              tokenUsage: null,
+              isDone: false,
+              totalTokens: 0,
             );
           }
           yield ChatStreamChunk(
             content: '',
-            isComplete: true,
-            tokenUsage: TokenUsage(promptTokens: 0, completionTokens: 0, totalTokens: 0),
+            isDone: true,
+            totalTokens: 0,
           );
         } else {
           final response = await buildxApi.sendMessage(lastMessage, history: history, memoryProvider: memoryProvider);
           yield ChatStreamChunk(
             content: response,
-            isComplete: true,
-            tokenUsage: TokenUsage(promptTokens: 0, completionTokens: 0, totalTokens: 0),
+            isDone: true,
+            totalTokens: 0,
           );
         }
         return;
       } catch (e) {
         yield ChatStreamChunk(
           content: '',
-          isComplete: true,
-          error: 'BuildX API Error: $e',
-          tokenUsage: null,
+          isDone: true,
+          totalTokens: 0,
         );
         return;
       }

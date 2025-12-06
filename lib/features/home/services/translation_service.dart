@@ -121,7 +121,7 @@ class TranslationService {
         messages: [
           {'role': 'user', 'content': prompt}
         ],
-        memoryProvider: context.read<MemoryProvider>(),
+        memoryProvider: contextProvider.read<MemoryProvider>(),
       );
 
       final buffer = StringBuffer();

@@ -328,12 +328,12 @@ class ToolHandlerService {
         final id = (args['id'] as num?)?.toInt() ?? -1;
         final content = (args['content'] ?? '').toString();
         if (id <= 0 || content.isEmpty) return '';
-        final m = await mp.update(id: id, content: content);
+        final m = await mp.update(id: id.toString(), content: content);
         return m?.content ?? '';
       } else if (name == 'delete_memory') {
         final id = (args['id'] as num?)?.toInt() ?? -1;
         if (id <= 0) return '';
-        final ok = await mp.delete(id: id);
+        final ok = await mp.delete(id: id.toString());
         return ok ? 'deleted' : '';
       }
     } catch (_) {

@@ -11,14 +11,14 @@ import 'select_copy_sheet.dart';
 import '../../../shared/widgets/snackbar.dart';
 import '../../../shared/widgets/ios_tactile.dart';
 import '../../../core/services/haptics.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:BuildX/l10n/app_localizations.dart';
 import '../../../desktop/desktop_context_menu.dart';
 import '../../../desktop/menu_anchor.dart';
 import '../../../desktop/select_copy_dialog.dart';
+import 'package:BuildX/desktop/html_preview_dialog.dart';
 import '../../../utils/markdown_preview_html.dart';
 import '../../../utils/markdown_media_sanitizer.dart';
 import '../../../shared/pages/webview_page.dart';
-import '../../../desktop/html_preview_dialog.dart';
 import 'dart:convert';
 
 enum MessageMoreAction { edit, fork, delete, share }
