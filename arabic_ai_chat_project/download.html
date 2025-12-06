@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحميل تطبيق الذكي العربي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 25px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+        
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .subtitle {
+            color: #718096;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+        
+        .features {
+            text-align: right;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+        
+        .app-info {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .download-btn {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon">🤖</div>
+        
+        <h1>الذكي العربي</h1>
+        <p class="subtitle">تطبيق محادثة ذكي باللغة العربية</p>
+        
+        <a href="https://github.com/egqfcyhkifgi/kelivo/raw/transform-to-buildx/arabic_ai_chat_project/releases/arabic_ai_chat_app.apk" 
+           class="download-btn" 
+           onclick="trackDownload()">
+            📥 تحميل التطبيق (23.7 MB)
+        </a>
+        
+        <div class="app-info">
+            <div class="info-row">
+                <span><strong>الإصدار:</strong></span>
+                <span>1.0.0</span>
+            </div>
+            <div class="info-row">
+                <span><strong>الحجم:</strong></span>
+                <span>23.7 ميجابايت</span>
+            </div>
+            <div class="info-row">
+                <span><strong>متطلبات النظام:</strong></span>
+                <span>Android 5.0+</span>
+            </div>
+            <div class="info-row">
+                <span><strong>اللغة:</strong></span>
+                <span>العربية</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h3 style="margin-bottom: 20px; color: #2d3748;">المميزات الرئيسية</h3>
+            
+            <div class="feature">
+                <div class="feature-icon">🌙</div>
+                <span>واجهة عربية كاملة مع دعم الوضع الليلي</span>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🔊</div>
+                <span>تحويل النص إلى كلام بصوت عربي واضح</span>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <span>تصميم عصري مع حركات وتأثيرات جذابة</span>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⚙️</div>
+                <span>إعدادات متقدمة لتخصيص تجربة الاستخدام</span>
+            </div>
+        </div>
+        
+        <div class="warning">
+            <strong>⚠️ ملاحظة مهمة:</strong> هذا إصدار تجريبي للاختبار والتطوير. تأكد من تفعيل "السماح بالتثبيت من مصادر غير معروفة" في إعدادات الأمان قبل التثبيت.
+        </div>
+        
+        <p style="margin-top: 30px; color: #718096; font-size: 0.9em;">
+            تم تطوير هذا التطبيق باستخدام Flutter مع التركيز على تجربة المستخدم العربي
+        </p>
+    </div>
+    
+    <script>
+        function trackDownload() {
+            console.log('تم بدء تحميل التطبيق');
+            // يمكن إضافة تتبع التحميلات هنا
+        }
+        
+        // تأثير تحريك العناصر عند التحميل
+        window.addEventListener('load', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(30px)';
+            container.style.transition = 'all 0.6s ease';
+            
+            setTimeout(() => {
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
